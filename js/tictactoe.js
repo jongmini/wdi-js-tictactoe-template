@@ -1,8 +1,8 @@
 $(function() {
 
   //### 'jquery' UI elements for game manipulation
-  //var game              =    // the game container
-  //var board             =    // the board  container
+  var game              = $('#game');   // the game container
+  var board             = $('#board');   // the board  container
   var status_indicators = $('#teams li');   // status bar container
 
   var tiles = [];                         // all the "tiles"

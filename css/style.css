@@ -15,7 +15,7 @@ img {
   display:block;
 }
 #game {
-  display:none;
+  /*display:none;*/
   position:absolute;
   width:480px;
   height:480px;
@@ -44,6 +44,7 @@ img {
   text-align:center;
   line-height:150px;
   font-size:100px;
+  z-index: 10;
 }
 .tile.combo {
   color:#b80000;
@@ -113,7 +114,7 @@ img {
   font-size:30px;
 }
 #overlay {
-  display:none;
+  /*display:none;*/
   position:fixed;
   top:0;
   left:0;
