@@ -21,7 +21,7 @@
 
       </ul>
       <div id="board" >
-        <div id="tile{{tile.id}}" ng-repeat="tile in tiles" class="tile" ng-click="handleClick()">{{tile.marker}}</div>
+        <div id="tile{{tile.id}}" ng-repeat="tile in tiles" class="tile" ng-click="markSq($index)">{{tile.team}}</div>
       </div>
       <div id="results">
         <h1></h1>
