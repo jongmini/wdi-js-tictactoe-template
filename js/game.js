@@ -13,13 +13,15 @@ ticTacToeApp.controller('ticTacToeCtrl',['$scope', function($scope){
       name:      'Ernie',
       marker:    'X',
       img_url:   'img/ernie.jpg',
-      isPlaying: ''
+      isPlaying: '',
+      sqaures:[]
     },
     {
       name:      'Bert',
       marker:    'O',
       img_url:   'img/bert.jpg',
-      isPlaying: ''
+      isPlaying: '',
+      squares:[]
     }
   ];
 
@@ -56,16 +58,22 @@ ticTacToeApp.controller('ticTacToeCtrl',['$scope', function($scope){
   };
 
   $scope.markSq = function(id){
-    // console.log($scope.tiles[id]);
     $scope.activePlayer();
-
+    var player = $scope.currentPlayer;
+    player.squares = player.squares||[];
     if($scope.tiles[id].mark === ''){
-      $scope.tiles[id].mark = $scope.currentPlayer.marker;
-      //currentPlayer's boolean should be true
+      $scope.tiles[id].mark = player.marker;
+      player.squares.push(id);
+      if(this.isWin(player.squares)===true){
+        console.log("won");
+      }else{
+        console.log("something else");
+      }
+
+      // console.log("player list "+player.squares);
+
       $scope.turns ++;
-      // $scope.currentPlayer.isPlaying = 'f';
-      console.log($scope.turns);
-      console.log($scope.currentPlayer);
+
     } else {
       console.log("taken");
     }
@@ -82,7 +90,16 @@ ticTacToeApp.controller('ticTacToeCtrl',['$scope', function($scope){
 
   // };
 
-  $scope.isActive = function() {
+  $scope.isWin = function(arr) {
+
+    _.each($scope.winCombos, function(combo){
+      if((_.difference(combo,arr)).length === 0){
+        console.log(combo+":"+arr);
+        return true;
+      } else {
+        return false;
+      }
+    });
 
   };
 
