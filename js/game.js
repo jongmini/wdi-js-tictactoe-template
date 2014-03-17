@@ -1,6 +1,7 @@
 var ticTacToeApp = angular.module("ticTacToeApp", []);
 
 ticTacToeApp.controller('ticTacToeCtrl',['$scope', function($scope){
+  
   $scope.game              = $('#game');   // the game container
   $scope.board             = $('#board');   // the board  container
   $scope.statusIndicators = $('#teams li');   // status bar container
@@ -11,31 +12,35 @@ ticTacToeApp.controller('ticTacToeCtrl',['$scope', function($scope){
     {
       name:      'Ernie',
       marker:    'X',
-      img_url:   'img/ernie.jpg'
+      img_url:   'img/ernie.jpg',
+      isPlaying: ''
     },
     {
       name:      'Bert',
       marker:    'O',
-      img_url:   'img/bert.jpg'
+      img_url:   'img/bert.jpg',
+      isPlaying: ''
     }
   ];
 
   $scope.initialize = function(){
 
-  $scope.win_combos = [
+  $scope.turns = 0;
+
+  $scope.winCombos = [
     [0,1,2], [3,4,5], [6,7,8], [0,4,8], [2,4,6], [0,3,6], [1,4,7], [2,5,8]
   ];
 
   $scope.tiles = [
-    {id: "0", isActive: false, marker:''}, 
-    {id: "1", isActive: false, marker:''},
-    {id: "2", isActive: false, marker:''},
-    {id: "3", isActive: false, marker:''},
-    {id: "4", isActive: false, marker:''},
-    {id: "5", isActive: false, marker:''},
-    {id: "6", isActive: false, marker:''},
-    {id: "7", isActive: false, marker:''},
-    {id: "8", isActive: false, marker:''}
+    {id: "0", mark:''}, 
+    {id: "1", mark:''},
+    {id: "2", mark:''},
+    {id: "3", mark:''},
+    {id: "4", mark:''},
+    {id: "5", mark:''},
+    {id: "6", mark:''},
+    {id: "7", mark:''},
+    {id: "8", mark:''}
     
     ];
 
@@ -51,25 +56,31 @@ ticTacToeApp.controller('ticTacToeCtrl',['$scope', function($scope){
   };
 
   $scope.markSq = function(id){
+    // console.log($scope.tiles[id]);
     $scope.activePlayer();
-    if($scope.tiles[id].team === ""){
-      $scope.tiles[id].team = $scope.currentPlayer.marker;
-      $scope.turns++;
+
+    if($scope.tiles[id].mark === ''){
+      $scope.tiles[id].mark = $scope.currentPlayer.marker;
+      //currentPlayer's boolean should be true
+      $scope.turns ++;
+      // $scope.currentPlayer.isPlaying = 'f';
+      console.log($scope.turns);
+      console.log($scope.currentPlayer);
     } else {
       console.log("taken");
     }
     console.log($scope.turns);
   };
 
-  $scope.handleClick = function() {
-    console.log(this.$index);
-    this.marker = 'X';
-    // is square active? 
+  // $scope.handleClick = function() {
+  //   console.log(this.$index);
+  //   this.marker = 'X';
+  //   // is square active? 
 
-    // mark it that players marker
-    // is it a winning choice? 
+  //   // mark it that players marker
+  //   // is it a winning choice? 
 
-  };
+  // };
 
   $scope.isActive = function() {
 
