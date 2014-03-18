@@ -61,16 +61,16 @@ ticTacToeApp.controller('ticTacToeCtrl',['$scope', function($scope){
     $scope.activePlayer();
     var player = $scope.currentPlayer;
     player.squares = player.squares||[];
-    if($scope.tiles[id].mark === ''){
-      $scope.tiles[id].mark = player.marker;
-      player.squares.push(id);
-      if(this.isWin(player.squares)===true){
+    if(this.tile.mark === ''){
+      this.tile.mark = player.marker;
+      player.squares.push(this.$index);
+      $scope.isWin(player.squares);
+      console.log($scope.status);
+      if($scope.status === "you won"){
         console.log("won");
-      }else{
-        console.log("something else");
+      } else {
+        console.log("game is not over");
       }
-
-      // console.log("player list "+player.squares);
 
       $scope.turns ++;
 
@@ -80,26 +80,21 @@ ticTacToeApp.controller('ticTacToeCtrl',['$scope', function($scope){
     console.log($scope.turns);
   };
 
-  // $scope.handleClick = function() {
-  //   console.log(this.$index);
-  //   this.marker = 'X';
-  //   // is square active? 
 
-  //   // mark it that players marker
-  //   // is it a winning choice? 
-
-  // };
 
   $scope.isWin = function(arr) {
-
-    _.each($scope.winCombos, function(combo){
+    var result = _.find($scope.winCombos, function(combo){
       if((_.difference(combo,arr)).length === 0){
         console.log(combo+":"+arr);
+        console.log("you won!");
+
         return true;
       } else {
         return false;
       }
     });
+
+    $scope.status = result ? "you won" : "";
 
   };
 
